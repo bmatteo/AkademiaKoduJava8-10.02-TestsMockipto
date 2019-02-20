@@ -9,6 +9,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import pl.academy.code.configurations.AppConfiguration;
 import pl.academy.code.configurations.AppConfigurationTest;
+import pl.academy.code.dao.IOrderDAO;
+import pl.academy.code.dao.IProductDAO;
 import pl.academy.code.entities.Order;
 import pl.academy.code.entities.Product;
 import pl.academy.code.services.IOrderService;
@@ -27,10 +29,10 @@ public class OrderEngineTest {
     OrderEngine orderEngine;
 
     @Autowired
-    IProductService productService;
+    IProductDAO productDAO;
 
     @Autowired
-    IOrderService orderService;
+    IOrderDAO orderDAO;
 
     @Test
     public void generateCommonOrderTest() {
@@ -39,16 +41,16 @@ public class OrderEngineTest {
         Assert.assertEquals(5, order.getProducts().size());
         Assert.assertEquals("Some Company", order.getCustomerName());
 
-        verify(orderService, times(1))
+        verify(orderDAO, times(1))
                 .persistOrder(Matchers.any(Order.class));
 
-        verify(productService, times(5))
+        verify(productDAO, times(5))
                 .persistProduct(Matchers.any(Product.class));
     }
 
     @Test
     public void getSpecialProductsFromDbTest() {
-        when(productService.getAllProducts()).thenReturn(prepareFakeProductList());
+        when(productDAO.getAllProducts()).thenReturn(prepareFakeProductList());
 
         List<Product> list = orderEngine.getSpecialProductsFromDb();
         Assert.assertEquals(3, list.size());

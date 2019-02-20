@@ -7,6 +7,8 @@ import pl.academy.code.services.ISessionFactoryService;
 import pl.academy.code.services.impl.SessionFactoryServiceImpl;
 
 @Configuration
-@ComponentScan({"pl.academy.code.services.impl", "pl.academy.code.operations"})
+@ComponentScan({"pl.academy.code.services.impl",
+        "pl.academy.code.operations",
+        "pl.academy.code.dao.impl"})
 public class AppConfiguration {
 }

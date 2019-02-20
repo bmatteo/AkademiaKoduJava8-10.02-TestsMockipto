@@ -56,12 +56,6 @@ public class OrderEngine {
 
         this.orderService.persistOrder(order);
 
-        this.productService.persistProduct(p1);
-        this.productService.persistProduct(p2);
-        this.productService.persistProduct(p3);
-        this.productService.persistProduct(p4);
-        this.productService.persistProduct(p5);
-
         return order;
     }
 
